@@ -16,6 +16,7 @@ export const startAddExpense = (expenseData = {}) => {
       amount = 0,
       createdAt = 0
     } = expenseData;
+
     const expense = { description, note, amount, createdAt };
 
     return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
@@ -67,6 +68,7 @@ export const setExpenses = (expenses) => ({
 export const startSetExpenses = () => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
+
     return database.ref(`users/${uid}/expenses`).once('value').then((snapshot) => {
       const expenses = [];
 
